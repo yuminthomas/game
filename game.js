@@ -95,10 +95,29 @@ function charSprite(dir, frame) {
   return (spriteCache[key] = c);
 }
 
+// ---------- 이미지 캐릭터 스프라이트 (20×54px, 발 위치 고정) ----------
+// 원본은 정면(살짝 왼쪽)을 보므로, 오른쪽을 볼 때 좌우 반전한다.
+const ANIM = {
+  idle: { frames: 4, ms: 220 },  // 숨쉬듯 위아래로
+  walk: { frames: 4, ms: 150 },
+};
+const SPRITE_W = 20, SPRITE_FEET = 52; // 발바닥이 닿는 행 (위에서부터)
+const sprites = {};
+for (const name in ANIM) {
+  sprites[name] = [];
+  for (let i = 1; i <= ANIM[name].frames; i++) {
+    const img = new Image();
+    img.src = `assets/character/${name}/${name}_${i}.png`;
+    sprites[name].push(img);
+  }
+}
+const spriteReady = img => img.complete && img.naturalWidth > 0;
+
 // ---------- 게임 상태 ----------
 const DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
 const player = {
   x: VW / 2, y: VH / 2, dir: 'down', anim: 0, speed: 80,
+  state: 'idle', stateT: 0, facing: 'left',
   attackT: 0, dashT: 0, dashVX: 0, dashVY: 0,
   cd: { attack: 0, dash: 0, fire: 0 },
 };
@@ -143,7 +162,11 @@ function update(dt) {
     if (ix) cand.push(ix > 0 ? 'right' : 'left');
     if (iy) cand.push(iy > 0 ? 'down' : 'up');
     if (p.attackT <= 0 && !cand.includes(p.dir)) p.dir = cand[0];
+    if (ix) p.facing = ix > 0 ? 'right' : 'left'; // 위/아래 이동 시엔 좌우 방향 유지
   }
+  // 애니메이션 상태: 바뀌면 1번 프레임부터
+  const next = ix || iy || p.dashT > 0 ? 'walk' : 'idle';
+  if (next !== p.state) { p.state = next; p.stateT = 0; } else p.stateT += dt;
 
   // 스킬
   if (pressed.has('attack') && p.cd.attack <= 0 && p.dashT <= 0) {
@@ -169,7 +192,7 @@ function update(dt) {
   // 이동 처리
   if (p.dashT > 0) {
     p.dashT -= dt;
-    afterimages.push({ x: p.x, y: p.y, dir: p.dir, t: 0.2 });
+    afterimages.push({ x: p.x, y: p.y, dir: p.dir, facing: p.facing, t: 0.2 });
     moveWithCollision(p, p.dashVX * dt, p.dashVY * dt);
   } else if (ix || iy) {
     const l = Math.hypot(ix, iy), sp = p.speed * (p.attackT > 0 ? 0.4 : 1);
@@ -199,7 +222,16 @@ function remove(arr, fn) { for (let i = arr.length - 1; i >= 0; i--) if (fn(arr[
 
 // ---------- 그리기 ----------
 const frameOf = p => (p.anim ? Math.floor(p.anim) % 4 : 0);
-function drawChar(x, y, dir, frame) { ctx.drawImage(charSprite(dir, frame), Math.round(x - 8), Math.round(y - 14)); }
+function drawChar(x, y, dir, frame, state = 'idle', t = 0, facing = 'left') {
+  const a = ANIM[state], img = sprites[state][Math.floor(t * 1000 / a.ms) % a.frames];
+  if (!spriteReady(img)) { // 이미지 로딩 전에는 기존 도트 캐릭터
+    ctx.drawImage(charSprite(dir, frame), Math.round(x - 8), Math.round(y - 14)); return;
+  }
+  const dx = Math.round(x - SPRITE_W / 2), dy = Math.round(y - SPRITE_FEET);
+  if (facing === 'right') {
+    ctx.save(); ctx.translate(dx + SPRITE_W, dy); ctx.scale(-1, 1); ctx.drawImage(img, 0, 0); ctx.restore();
+  } else ctx.drawImage(img, dx, dy);
+}
 function shadow(x, y) { ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.fillRect(Math.round(x - 5), Math.round(y + 1), 10, 2); }
 
 function drawDummy() {
@@ -216,7 +248,7 @@ function drawSlash() {
   const p = player, [dx, dy] = DIRS[p.dir];
   const t = 1 - p.attackT / 0.18;           // 0 → 1
   const base = Math.atan2(dy, dx), a = base - 1.2 + t * 2.4;
-  const cx = p.x, cy = p.y - 6;
+  const cx = p.x, cy = p.y - 22; // 캐릭터 몸통 높이
   ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 3;
   ctx.beginPath(); ctx.arc(cx, cy, 13, base - 1.2, a); ctx.stroke();
   ctx.fillStyle = '#e6e6e6';
@@ -240,13 +272,13 @@ function drawHUD() {
 function render() {
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(bg, 0, 0);
-  for (const a of afterimages) { ctx.globalAlpha = a.t / 0.2 * 0.5; drawChar(a.x, a.y, a.dir, 0); }
+  for (const a of afterimages) { ctx.globalAlpha = a.t / 0.2 * 0.5; drawChar(a.x, a.y, a.dir, 0, 'idle', 0, a.facing); }
   ctx.globalAlpha = 1;
   // y 순서대로 그리기
   const list = [{ y: dummy.y, d: drawDummy }, { y: player.y, d: () => {
     shadow(player.x, player.y);
     if (player.attackT > 0 && player.dir === 'up') drawSlash();
-    drawChar(player.x, player.y, player.dir, frameOf(player));
+    drawChar(player.x, player.y, player.dir, frameOf(player), player.state, player.stateT, player.facing);
     if (player.attackT > 0 && player.dir !== 'up') drawSlash();
   } }];
   list.sort((a, b) => a.y - b.y).forEach(o => o.d());
