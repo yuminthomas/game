@@ -96,12 +96,12 @@ function charSprite(dir, frame) {
 }
 
 // ---------- 이미지 캐릭터 스프라이트 (20×54px, 발 위치 고정) ----------
-// 원본은 정면(살짝 왼쪽)을 보므로, 오른쪽을 볼 때 좌우 반전한다.
+// 원본은 오른쪽을 보므로, 왼쪽을 볼 때 좌우 반전한다.
 const ANIM = {
-  idle: { frames: 4, ms: 220 },  // 숨쉬듯 위아래로
-  walk: { frames: 4, ms: 150 },
+  idle: { frames: 6, ms: 160 },  // 숨쉬기 + 머리카락·스카프 흔들림
+  walk: { frames: 8, ms: 85 },   // 앞으로 기울인 달리기
 };
-const SPRITE_W = 20, SPRITE_FEET = 52; // 발바닥이 닿는 행 (위에서부터)
+const SPRITE_W = 48, SPRITE_FEET = 46; // 발바닥이 닿는 행 (위에서부터)
 const sprites = {};
 for (const name in ANIM) {
   sprites[name] = [];
@@ -117,7 +117,7 @@ const spriteReady = img => img.complete && img.naturalWidth > 0;
 const DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
 const player = {
   x: VW / 2, y: VH / 2, dir: 'down', anim: 0, speed: 80,
-  state: 'idle', stateT: 0, facing: 'left',
+  state: 'idle', stateT: 0, facing: 'right',
   attackT: 0, dashT: 0, dashVX: 0, dashVY: 0,
   cd: { attack: 0, dash: 0, fire: 0 },
 };
@@ -222,13 +222,13 @@ function remove(arr, fn) { for (let i = arr.length - 1; i >= 0; i--) if (fn(arr[
 
 // ---------- 그리기 ----------
 const frameOf = p => (p.anim ? Math.floor(p.anim) % 4 : 0);
-function drawChar(x, y, dir, frame, state = 'idle', t = 0, facing = 'left') {
+function drawChar(x, y, dir, frame, state = 'idle', t = 0, facing = 'right') {
   const a = ANIM[state], img = sprites[state][Math.floor(t * 1000 / a.ms) % a.frames];
   if (!spriteReady(img)) { // 이미지 로딩 전에는 기존 도트 캐릭터
     ctx.drawImage(charSprite(dir, frame), Math.round(x - 8), Math.round(y - 14)); return;
   }
   const dx = Math.round(x - SPRITE_W / 2), dy = Math.round(y - SPRITE_FEET);
-  if (facing === 'right') {
+  if (facing === 'left') {
     ctx.save(); ctx.translate(dx + SPRITE_W, dy); ctx.scale(-1, 1); ctx.drawImage(img, 0, 0); ctx.restore();
   } else ctx.drawImage(img, dx, dy);
 }
@@ -248,7 +248,7 @@ function drawSlash() {
   const p = player, [dx, dy] = DIRS[p.dir];
   const t = 1 - p.attackT / 0.18;           // 0 → 1
   const base = Math.atan2(dy, dx), a = base - 1.2 + t * 2.4;
-  const cx = p.x, cy = p.y - 22; // 캐릭터 몸통 높이
+  const cx = p.x, cy = p.y - 17; // 캐릭터 몸통 높이
   ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 3;
   ctx.beginPath(); ctx.arc(cx, cy, 13, base - 1.2, a); ctx.stroke();
   ctx.fillStyle = '#e6e6e6';
