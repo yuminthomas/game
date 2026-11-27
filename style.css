@@ -1,0 +1,6 @@
+html, body { margin: 0; height: 100%; background: #111; color: #ddd; overflow: hidden;
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+body { display: flex; align-items: center; justify-content: center; }
+#wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+#game { display: block; image-rendering: pixelated; image-rendering: crisp-edges; background: #000; }
+#help { font-size: 14px; opacity: .8; }
