@@ -10,16 +10,16 @@ def hexc(h):
     h = h.lstrip('#'); return np.array([int(h[i:i+2], 16) for i in (0, 2, 4)] + [255], np.uint8)
 
 C = {k: hexc(v) for k, v in dict(
-    out='1c1220',
-    hair='e2b450', hairD='a7742f', hairL='f6d880', hairX='fff4c4',
-    skin='f6d0b1', skinD='dca084', blush='ec8d8d',
-    eye='e8434f', eyeD='8c1d2e', white='ffffff',
-    armor='2f5566', armorD='1f3644', armorL='4f8296',
-    plate='9aa3bd', plateD='6c7392', plateL='d4daea',
-    scarf='c8323f', scarfD='8e1f2e', scarfL='ef5a5a',
-    belt='6b4630', beltL='a0703f', gold='f0c050', goldD='b0802a',
-    leg='4a3a4e', legD='2e2434', legL='6c5873',
-    boot='8a5c3c', bootD='5a3a2a', bootL='b98354',
+    out='2a1c1e',
+    hair='e8dc94', hairD='b4a45c', hairL='f6efbc', hairX='fffbe2',
+    skin='f8dcc4', skinD='d8a888', blush='f0a0a0', tan='e8b896', tanD='b8805e',
+    eye='7cc8ec', eyeD='3e7ea8', white='ffffff',
+    armor='a8281f', armorD='6c1614', armorL='cc4430',
+    plate='e4e4e8', plateD='a8a8b4', plateL='ffffff',
+    scarf='b42a22', scarfD='741a16', scarfL='dc4a3a',
+    belt='5a3424', beltL='8a5434', gold='ecc85a', goldD='b08a30',
+    leg='f2f2f4', legD='a4a4b0', legL='ffffff',
+    boot='6c6c74', bootD='424248', bootL='a0a0a8',
     blade='dfe6f2', bladeD='93a0b8', bladeL='ffffff',
 ).items()}
 
@@ -87,7 +87,11 @@ def ik(hx, hy, fx, fy, a, b, bend):
 
 # ---------- head (hand-pixeled, 18x17, faces right) ----------
 HEAD = [
-    "......oooooo........",
+    ".........oo.........",
+    "........oLHo........",
+    "........oHHo........",
+    ".........oHo........",
+    "......ooooHooo......",
     "....ooHHHHHHoo......",
     "...oHHHXLLHHHHoo....",
     "..oHHHLLLHHHHHHHo...",
@@ -109,7 +113,7 @@ HEAD = [
 ]
 HMAP = {'o': 'out', 'H': 'hair', 'd': 'hairD', 'L': 'hairL', 'X': 'hairX', 's': 'skin', 'S': 'skinD',
         'e': 'eye', 'E': 'eyeD', 'W': 'white', 'b': 'blush', 'm': 'skinD'}
-HEAD_NECK = (11, 17)  # pixel in head map that sits on the neck point
+HEAD_NECK = (11, 21)  # pixel in head map that sits on the neck point
 
 def draw_head(dst, nx, ny):
     L = Layer()
@@ -134,8 +138,8 @@ def character(p):
     hx, hy, lean = p['hipx'], p['hipy'], p['lean']
     neck = (hx + lean, hy - 10 + p.get('breath', 0))
     tx = lambda y: hx + lean * (hy - y) / (hy - neck[1])
-    sh_near = (tx(neck[1]+2) + 2.5, neck[1] + 2)
-    sh_far = (tx(neck[1]+2) - 2.5, neck[1] + 2)
+    sh_near = (tx(neck[1]+2) + 4, neck[1] + 2)
+    sh_far = (tx(neck[1]+2) - 3.5, neck[1] + 2)
     head_n = (neck[0], neck[1] + p.get('head_dy', 0))
     hox, hoy = head_n[0] - HEAD_NECK[0], head_n[1] - HEAD_NECK[1]
 
@@ -145,7 +149,7 @@ def character(p):
     stroke(S, sp, [3, 3, 3, 3, 2, 2, 2], 'scarf'); shade(S, 'scarfD', 'scarfL'); outline(S); comp(cv, S)
     # ponytail
     P = Layer()
-    pp = chain(hox + 3, hoy + 6, 7, 2.4, p['hair_ang'], p['hair_wave'], p['hair_phase'])
+    pp = chain(hox + 3, hoy + 10, 7, 2.4, p['hair_ang'], p['hair_wave'], p['hair_phase'])
     stroke(P, pp, [6, 5, 5, 4, 3, 3, 2, 1], 'hair'); shade(P, 'hairD', 'hairL'); outline(P); comp(cv, P)
 
     def leg(L, hip, foot, dark):
@@ -178,10 +182,9 @@ def character(p):
             stroke(B, [(base[0]+math.cos(ga)*2, base[1]+math.sin(ga)*2), (base[0]-math.cos(ga)*2, base[1]-math.sin(ga)*2)], 1, 'gold')
             outline(B); comp(L, B)
         A = Layer()
-        stroke(A, [sh, (ex, ey)], 3, 'armorD' if dark else 'armor')
-        stroke(A, [(ex, ey), (fx, fy)], 3, 'skinD' if dark else 'skin')
-        stroke(A, [((ex+fx)/2+(fx-ex)*0.15, (ey+fy)/2+(fy-ey)*0.15), (fx, fy)], 3, 'armorD' if dark else 'armorL')  # gauntlet
-        if not dark: shade(A, 'armorD', 'armorL', 'armor')
+        stroke(A, [sh, (ex, ey)], 3, 'tanD' if dark else 'tan')
+        stroke(A, [(ex, ey), (fx, fy)], 3, 'tanD' if dark else 'tan')
+        if not dark: shade(A, 'tanD', 'skin', 'tan')
         outline(A); comp(L, A)
 
     # far arm & far leg
@@ -196,29 +199,29 @@ def character(p):
         hw = prof[i] + (0.5 if i <= 4 else 0) * (p.get('breath_w', 0))
         for x in range(int(round(c - hw)), int(round(c + hw)) + 1):
             col = 'armor'
-            if 2 <= i <= 6 and x >= c - 1: col = 'plate'
+            if 1 <= i <= 7 and x >= c - 3 + (1 if i > 5 else 0): col = 'plate'
             if i == 8 or i == 9: col = 'belt'
             T.px(x, y, col)
     shade(T, 'armorD', 'armorL', 'armor'); shade(T, 'plateD', 'plateL', 'plate')
     bx = tx(neck[1]+8); T.px(bx + 1, neck[1]+8, 'gold'); T.px(bx + 1, neck[1]+9, 'goldD')
     outline(T); comp(cv, T)
-    # coat tail: hangs behind the hips, flares back when running
-    CT = Layer(); fl = p.get('flap', 0); top = (tx(hy-1) - 2, hy - 1)
-    cp = chain(top[0], top[1], 4, 2.0, math.radians(100 + fl * 18), 0.25 * (1 + fl/2), p.get('flap_phase', 0), 0.8)
-    stroke(CT, cp, [5, 5, 4, 4, 3], 'armorD')
-    shade(CT, 'scarfD', 'armor', 'armorD')
-    outline(CT); comp(cv, CT)
-    # shorts
-    SH = Layer()
-    for i in range(0, 3):
-        y = hy + i; c = hx + lean * -i / 10
-        for x in range(int(round(c - 3)), int(round(c + 3)) + 1): SH.px(x, y, 'armor')
-    shade(SH, 'armorD', 'armorL'); outline(SH); comp(cv, SH)
-    # redraw torso on top of the coat tail
+    # cape: hangs from the back shoulder, flares back when running
+    CT = Layer(); fl = p.get('flap', 0); top = (tx(neck[1]+2) - 3, neck[1] + 2)
+    cp = chain(top[0], top[1], 5, 2.2, math.radians(98 + fl * 22), 0.22 * (1 + fl/2), p.get('flap_phase', 0), 0.8)
+    stroke(CT, cp, [4, 5, 5, 5, 4, 3], 'scarf')
+    shade(CT, 'scarfD', 'scarfL'); outline(CT); comp(cv, CT)
+    # skirt: flares out, hem trails back when running
+    SK = Layer()
+    for i in range(0, 4):
+        y = hy - 1 + i; c = hx + lean * -i / 10
+        back = 3 + i * 0.7 + fl * i / 3; front = 3 + i * 0.6 - fl * i / 6
+        for x in range(int(round(c - back)), int(round(c + front)) + 1):
+            SK.px(x, y, 'gold' if i == 3 else ('armorD' if (x - int(c) + i) % 4 == 0 and i > 0 else 'armor'))
+    shade(SK, 'armorD', 'armorL', 'armor'); outline(SK)
     comp(cv, T)
 
 
-    NL = Layer(); leg(NL, (hx + 1, hy), p['feet'][0], False); comp(cv, NL)
+    NL = Layer(); leg(NL, (hx + 1, hy), p['feet'][0], False); comp(cv, NL); comp(cv, SK)
 
     draw_head(cv, *head_n)
     # scarf wrap around neck
@@ -242,7 +245,7 @@ def idle_frames():
             hipx=22, hipy=hipy, lean=1,
             breath=0 if b < 0.5 else 0, head_dy=round(b * 1.0 + (0.4 if f in (2, 3) else 0)),
             feet=[(26, GROUND), (19, GROUND)],
-            hands=[(3, 6 - round(b)), (-2, 7)], sword=math.radians(-35 + 6 * b),
+            hands=[(1.5, 8 - round(b)), (-1.5, 8)],
             hair_ang=math.radians(105), hair_wave=0.3, hair_phase=t,
             scarf_ang=math.radians(150), scarf_wave=0.45, scarf_phase=t + 1,
             flap=0, flap_phase=t)))
@@ -265,7 +268,6 @@ def run_frames():
             head_dy=1 if BOB[f] > 0 else 0,
             feet=[(hipx + 1 + nf[0], GROUND + nf[1]), (hipx - 1 + ff[0], GROUND + ff[1])],
             hands=[(-4 * sw + 1, 5 - 1.5 * abs(sw)), (4 * sw + 1, 5 - 1.5 * abs(sw))],
-            sword=math.radians(160 + 12 * sw),
             hair_ang=math.radians(152), hair_wave=0.7, hair_phase=t * 2,
             scarf_ang=math.radians(185), scarf_wave=0.6, scarf_phase=t * 2 + 0.7,
             flap=2, flap_phase=t * 2)))
