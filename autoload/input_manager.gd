@@ -117,18 +117,14 @@ func key_for(action: String) -> int:
 		if keymap[k] == action: return k
 	return -1
 
+const SHORT := {KEY_SPACE: "Spc", KEY_ESCAPE: "Esc", KEY_TAB: "Tab", KEY_SHIFT: "Shft", KEY_CTRL: "Ctrl", KEY_ALT: "Alt",
+	KEY_ENTER: "Ent", KEY_BACKSPACE: "BS", KEY_QUOTELEFT: "`", KEY_MINUS: "-", KEY_EQUAL: "=", KEY_BRACKETLEFT: "[",
+	KEY_BRACKETRIGHT: "]", KEY_SEMICOLON: ";", KEY_APOSTROPHE: "'", KEY_COMMA: ",", KEY_PERIOD: ".", KEY_SLASH: "/",
+	KEY_BACKSLASH: "\\", KEY_UP: "↑", KEY_DOWN: "↓", KEY_LEFT: "←", KEY_RIGHT: "→"}
+
 func key_label(keycode: int) -> String:
 	if keycode < 0: return "-"
-	match keycode:
-		KEY_SPACE: return "Spc"
-		KEY_ESCAPE: return "Esc"
-		KEY_TAB: return "Tab"
-		KEY_SHIFT: return "Shft"
-		KEY_CTRL: return "Ctrl"
-		KEY_ALT: return "Alt"
-		KEY_ENTER: return "Ent"
-		KEY_BACKSPACE: return "BS"
-		KEY_QUOTELEFT: return "`"
+	if SHORT.has(keycode): return SHORT[keycode]
 	return OS.get_keycode_string(keycode)
 
 # ---------- 선입력 버퍼 ----------

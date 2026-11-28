@@ -250,7 +250,8 @@ func _update_spin(dt: float) -> void:
 	while st.count < hits and t >= dur * st.count / hits:
 		st.count += 1
 		var a0 := t * 18.0
-		Fx.swoosh(c, r - 2, a0, a0 + PI * 1.4, Color(0.9, 0.95, 1), 3, 0.15)
+		Fx.swoosh(c, r - 2, a0, a0 + PI * 1.4, Color(0.9, 0.95, 1), 3, 0.2)
+		Fx.ring(c, r, Color(0.9, 0.95, 1, 0.5), 0.2, 1)
 		strike_shape(Combat.circle(c, r), float(p.mult))
 		if p.get("trail_bleed", false): _bleed_trail()
 	if float(p.get("pull", 0.0)) > 0:
