@@ -1,0 +1,273 @@
+{
+ "_comment": "밸런스 공식 계수와 조작감 수치. GDD 5장·6장 기준. (decided) 표시는 기획서에 없어서 정한 값이며 docs/PROGRESS.md 에 이유가 있다.",
+ "tile": 16,
+ "control": {
+  "move_speed": 100,
+  "move_speed_max": 140,
+  "move_accel": 1400,
+  "move_decel": 1800,
+  "input_buffer": 0.15,
+  "aim_assist_angle": 30,
+  "aim_assist_range": 96,
+  "dash": {
+   "duration": 0.2,
+   "invuln": 0.2,
+   "speed": 300,
+   "charges": 2,
+   "recharge": 1.2,
+   "attack_window": 0.2,
+   "(decided) speed": "0.2초 동안 약 60px(3.75칸)"
+  },
+  "just_dodge": {
+   "window": 0.12,
+   "slow_duration": 0.6,
+   "slow_scale": 0.3,
+   "stamina": 15
+  },
+  "parry": {
+   "window": 0.15,
+   "guard_duration": 0.35,
+   "guard_reduction": 0.7,
+   "cooldown": 0.8,
+   "stamina": 20,
+   "enemy_stun": 1.0,
+   "next_attack_crit": true
+  },
+  "charge_time": 0.6,
+  "combo_reset": 0.45,
+  "derivative_dot": 0.6,
+  "airborne_damage_bonus": 0.2,
+  "airborne_height": 18,
+  "hit_react_time": 0.25,
+  "player_invuln_after_hit": 0.35
+ },
+ "hitstop_frames": {
+  "normal": 3,
+  "finisher": 5,
+  "crit": 5,
+  "parry": 8
+ },
+ "shake": {
+  "finisher": 2.0,
+  "greatsword": 2.5,
+  "boss": 3.5,
+  "decay": 12.0
+ },
+ "hit_flash_frames": 2,
+ "knockback": {
+  "normal": 40,
+  "finisher": 120,
+  "decay": 10.0
+ },
+ "stamina": {
+  "max": 100,
+  "hit": 4,
+  "charge_hit": 10,
+  "just_dodge": 15,
+  "parry": 20,
+  "regen_out_of_combat": 5,
+  "regen_cap": 50,
+  "combat_timeout": 4.0
+ },
+ "potion": {
+  "charges": 3,
+  "max_charges": 5,
+  "heal_pct": 0.4,
+  "upgraded_heal_pct": 0.6,
+  "duration": 1.0,
+  "move_slow": 0.5
+ },
+ "stats": {
+  "points_per_level": 5,
+  "start": 5,
+  "str_groggy": 0.005,
+  "dex_crit": 0.001,
+  "dex_aspd": 0.001,
+  "int_skill_dmg": 0.003,
+  "int_stamina_gain": 0.002,
+  "vit_hp": 10,
+  "vit_def": 0.5,
+  "main_stat": {
+   "sword": "str",
+   "greatsword": "str",
+   "spear": "str",
+   "dagger": "dex",
+   "bow": "dex",
+   "staff": "int"
+  },
+  "sub_stat": {
+   "sword": "dex",
+   "greatsword": "dex",
+   "spear": "dex",
+   "dagger": "str",
+   "bow": "str",
+   "staff": "vit"
+  },
+  "main_coef": 0.01,
+  "sub_coef": 0.004
+ },
+ "derived": {
+  "hp_base": 100,
+  "hp_per_level": 20,
+  "dr_const": 200,
+  "dr_cap": 0.75,
+  "crit_base": 0.05,
+  "crit_cap": 0.8,
+  "crit_damage": 1.5,
+  "aspd_cap": 0.6,
+  "move_cap": 140,
+  "cdr_cap": 0.3,
+  "random_min": 0.95,
+  "random_max": 1.05
+ },
+ "exp": {
+  "max_level": 70,
+  "req_base": 40,
+  "req_exp": 1.7,
+  "mon_base": 5,
+  "mon_exp": 1.3,
+  "rank_mult": {
+   "normal": 1,
+   "elite": 5,
+   "midboss": 40,
+   "boss": 100
+  },
+  "penalty": [
+   [
+    10,
+    0.1
+   ],
+   [
+    5,
+    0.5
+   ]
+  ],
+  "death_loss": 0.05
+ },
+ "monster": {
+  "hp_base": 40,
+  "hp_growth": 1.22,
+  "atk_base": 8,
+  "atk_growth": 1.15,
+  "def_per_level": 2,
+  "rank": {
+   "normal": {
+    "hp": 1,
+    "atk": 1
+   },
+   "elite": {
+    "hp": 6,
+    "atk": 1.5
+   },
+   "midboss": {
+    "hp": 25,
+    "atk": 1.8
+   },
+   "boss": {
+    "hp": 50,
+    "atk": 2
+   }
+  }
+ },
+ "groggy": {
+  "basic": 1,
+  "charge": 5,
+  "parry": 15,
+  "greatsword_mult": 1.5,
+  "duration": 4.0,
+  "damage_bonus": 0.3,
+  "decay_delay": 3.0,
+  "decay_per_sec": 0.1,
+  "(decided) decay": "3초간 안 맞으면 초당 최대치의 10%씩 감소"
+ },
+ "chronoforce": {
+  "table": [
+   [
+    1.5,
+    1.2,
+    0.9
+   ],
+   [
+    1.3,
+    1.1,
+    0.95
+   ],
+   [
+    1.0,
+    1.0,
+    1.0
+   ],
+   [
+    0.9,
+    0.8,
+    1.1
+   ],
+   [
+    0.7,
+    0.6,
+    1.3
+   ],
+   [
+    0.5,
+    0.3,
+    1.6
+   ],
+   [
+    0.0,
+    0.1,
+    2.0
+   ]
+  ],
+  "_table": "[내 크로노포스/요구치 이상, 주는 피해, 받는 피해] 위에서부터 검사",
+  "core_per_level": 10,
+  "core_max_level": 20,
+  "core_main_stat": 3,
+  "core_hp_pct": 0.01,
+  "appearance_steps": [
+   0,
+   50,
+   150,
+   300,
+   450
+  ]
+ },
+ "mastery": {
+  "max_level": 10,
+  "attack_per_level": 0.02,
+  "exp_share": 0.3,
+  "req_base": 60,
+  "req_growth": 1.6,
+  "passive_levels": [
+   5,
+   10
+  ],
+  "(decided)": "숙련도 경험치 = 처치 경험치의 30%, Lv n→n+1 필요량 60×1.6^(n-1)"
+ },
+ "skills": {
+  "max_level": 5,
+  "damage_per_level": 0.12,
+  "lv3_cdr": 0.15,
+  "offer_new_weight": 0.7,
+  "offer_owned_weight": 0.3,
+  "offer_count": 3
+ },
+ "weapon_attack_formula": {
+  "base": 10,
+  "per_level": 2.2
+ },
+ "armor_formula": {
+  "base": 3,
+  "per_level": 0.8,
+  "slot_mult": {
+   "chest": 1.5,
+   "helmet": 1.0,
+   "gloves": 1.0,
+   "boots": 1.0
+  }
+ },
+ "enhance": {
+  "per_level": 0.06,
+  "max": 10
+ },
+ "status_icons_max": 8
+}
