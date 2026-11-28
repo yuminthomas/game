@@ -1,0 +1,1370 @@
+{
+ "_comment": "GDD 8-3, 8-4 스킬. behavior 는 scripts/skills/skill_executor.gd 의 동작 유형, lv5 는 강화 Lv5 에서 덮어쓰는 값. mult 는 Lv1 기준 배율.",
+ "tiers": {
+  "old": {
+   "name": "낡은",
+   "color": "#a7a29a"
+  },
+  "trainee": {
+   "name": "수련자",
+   "color": "#7fb0ff"
+  },
+  "master": {
+   "name": "달인",
+   "color": "#c38bff"
+  },
+  "meridian": {
+   "name": "메리디안",
+   "color": "#ffb84d"
+  },
+  "chrono": {
+   "name": "크로노",
+   "color": "#bff3ff"
+  }
+ },
+ "skills": [
+  {
+   "id": "sw_power_strike",
+   "name": "강타",
+   "cls": "sword",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 3,
+   "mult_text": "250%",
+   "desc": "전방 강하게 베기, 적 경직 0.5초",
+   "lv5_desc": "충격파가 뒤로 2칸 더 나감",
+   "pose": "slash",
+   "groggy": 3,
+   "behavior": {
+    "type": "strike",
+    "shape": "arc",
+    "range": 1.8,
+    "angle": 120,
+    "mult": 2.5,
+    "effects": [
+     {
+      "status": "stagger",
+      "duration": 0.5
+     }
+    ]
+   },
+   "lv5": {
+    "shockwave_extra": 2
+   }
+  },
+  {
+   "id": "sw_dash_slash",
+   "name": "돌진 베기",
+   "cls": "sword",
+   "tier": "old",
+   "stamina": 20,
+   "cooldown": 5,
+   "mult_text": "180%",
+   "desc": "4칸 돌진하며 경로의 적 베기, 돌진 중 무적",
+   "lv5_desc": "2회 연속 사용",
+   "pose": "slash",
+   "groggy": 3,
+   "behavior": {
+    "type": "dash_strike",
+    "distance": 4,
+    "duration": 0.22,
+    "width": 1.2,
+    "mult": 1.8,
+    "invuln": true
+   },
+   "lv5": {
+    "charges": 2
+   }
+  },
+  {
+   "id": "sw_whirl",
+   "name": "회전 베기",
+   "cls": "sword",
+   "tier": "trainee",
+   "stamina": 25,
+   "cooldown": 7,
+   "mult_text": "60%×5",
+   "desc": "제자리 회전, 주변 적 끌어당김",
+   "lv5_desc": "회전 중 천천히 이동 가능",
+   "pose": "spin",
+   "groggy": 5,
+   "behavior": {
+    "type": "spin",
+    "radius": 1.8,
+    "hits": 5,
+    "duration": 0.8,
+    "mult": 0.6,
+    "pull": 1.0,
+    "move": 0.0
+   },
+   "lv5": {
+    "move": 0.4
+   }
+  },
+  {
+   "id": "sw_rising",
+   "name": "올려베기",
+   "cls": "sword",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 6,
+   "mult_text": "200%",
+   "desc": "적을 1초간 띄움",
+   "lv5_desc": "떠오른 적에게 추가 타 자동",
+   "pose": "slash",
+   "groggy": 5,
+   "behavior": {
+    "type": "strike",
+    "shape": "arc",
+    "range": 1.8,
+    "angle": 110,
+    "mult": 2.0,
+    "effects": [
+     {
+      "status": "airborne",
+      "duration": 1.0
+     }
+    ]
+   },
+   "lv5": {
+    "followup_mult": 1.0
+   }
+  },
+  {
+   "id": "sw_counter",
+   "name": "반격 자세",
+   "cls": "sword",
+   "tier": "master",
+   "stamina": 15,
+   "cooldown": 8,
+   "mult_text": "400%",
+   "desc": "0.6초 자세, 그동안 맞으면 무피해 + 강한 반격",
+   "lv5_desc": "반격 시 기력 전부 반환",
+   "pose": "guard",
+   "groggy": 6,
+   "behavior": {
+    "type": "counter",
+    "duration": 0.6,
+    "range": 2.0,
+    "angle": 160,
+    "mult": 4.0
+   },
+   "lv5": {
+    "refund": true
+   }
+  },
+  {
+   "id": "sw_flash_cuts",
+   "name": "섬광 연참",
+   "cls": "sword",
+   "tier": "master",
+   "stamina": 35,
+   "cooldown": 12,
+   "mult_text": "120%×6",
+   "desc": "주변 적들 사이를 순간이동하며 6연타",
+   "lv5_desc": "8연타",
+   "pose": "slash",
+   "groggy": 6,
+   "behavior": {
+    "type": "multi_teleport",
+    "hits": 6,
+    "interval": 0.08,
+    "radius": 6,
+    "mult": 1.2,
+    "invuln": true
+   },
+   "lv5": {
+    "hits": 8
+   }
+  },
+  {
+   "id": "sw_time_sever",
+   "name": "시간 절단",
+   "cls": "sword",
+   "tier": "meridian",
+   "stamina": 50,
+   "cooldown": 25,
+   "mult_text": "900%",
+   "desc": "전방 직선의 시간을 베어 적 1.5초 정지",
+   "lv5_desc": "정지 시간 2.5초",
+   "pose": "slash",
+   "groggy": 8,
+   "behavior": {
+    "type": "beam",
+    "length": 10,
+    "width": 1.5,
+    "mult": 9.0,
+    "delay": 0.25,
+    "effects": [
+     {
+      "status": "time_stop",
+      "duration": 1.5
+     }
+    ]
+   },
+   "lv5": {
+    "effect_duration": 2.5
+   }
+  },
+  {
+   "id": "sw_thousand_blades",
+   "name": "천 개의 칼날",
+   "cls": "sword",
+   "tier": "meridian",
+   "stamina": 60,
+   "cooldown": 40,
+   "mult_text": "80%×20",
+   "desc": "4초간 내 주위에 잔상 칼날 폭풍, 이동 가능",
+   "lv5_desc": "끝날 때 대폭발 500%",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "aura",
+    "radius": 2.5,
+    "duration": 4.0,
+    "hits": 20,
+    "mult": 0.8,
+    "visual": "blades",
+    "count": 8
+   },
+   "lv5": {
+    "end_mult": 5.0
+   }
+  },
+  {
+   "id": "gs_slam",
+   "name": "내려찍기",
+   "cls": "greatsword",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 4,
+   "mult_text": "280%",
+   "desc": "전방 내리찍기 + 작은 충격파",
+   "lv5_desc": "충격파에 기절 1초",
+   "pose": "smash",
+   "groggy": 3,
+   "behavior": {
+    "type": "strike",
+    "shape": "circle_front",
+    "range": 1.6,
+    "radius": 1.4,
+    "mult": 2.8,
+    "shockwave": true
+   },
+   "lv5": {
+    "effects": [
+     {
+      "status": "stagger",
+      "duration": 1.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "gs_shoulder",
+   "name": "어깨 박치기",
+   "cls": "greatsword",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 5,
+   "mult_text": "160%",
+   "desc": "3칸 돌진, 슈퍼아머, 적 밀어냄",
+   "lv5_desc": "벽에 부딪히면 추가 200%",
+   "pose": "thrust",
+   "groggy": 3,
+   "behavior": {
+    "type": "dash_strike",
+    "distance": 3,
+    "duration": 0.25,
+    "width": 1.4,
+    "mult": 1.6,
+    "superarmor": true,
+    "carry": true
+   },
+   "lv5": {
+    "wall_mult": 2.0
+   }
+  },
+  {
+   "id": "gs_great_spin",
+   "name": "대회전",
+   "cls": "greatsword",
+   "tier": "trainee",
+   "stamina": 25,
+   "cooldown": 8,
+   "mult_text": "75%×4",
+   "desc": "넓게 회전, 천천히 이동 가능",
+   "lv5_desc": "6회전",
+   "pose": "spin",
+   "groggy": 5,
+   "behavior": {
+    "type": "spin",
+    "radius": 2.4,
+    "hits": 4,
+    "duration": 1.0,
+    "mult": 0.75,
+    "move": 0.4,
+    "superarmor": true
+   },
+   "lv5": {
+    "hits": 6,
+    "duration": 1.4
+   }
+  },
+  {
+   "id": "gs_earth_split",
+   "name": "대지 가르기",
+   "cls": "greatsword",
+   "tier": "trainee",
+   "stamina": 25,
+   "cooldown": 7,
+   "mult_text": "350%",
+   "desc": "전방 6칸 직선으로 땅이 갈라짐",
+   "lv5_desc": "균열에 2초 화상 장판",
+   "pose": "smash",
+   "groggy": 5,
+   "behavior": {
+    "type": "beam",
+    "length": 6,
+    "width": 1.2,
+    "mult": 3.5,
+    "delay": 0.15,
+    "visual": "crack"
+   },
+   "lv5": {
+    "burn_zone": 2.0
+   }
+  },
+  {
+   "id": "gs_rage",
+   "name": "분노",
+   "cls": "greatsword",
+   "tier": "master",
+   "stamina": 30,
+   "cooldown": 30,
+   "mult_text": "—",
+   "desc": "8초간 공격속도 +30%, 슈퍼아머",
+   "lv5_desc": "지속 12초",
+   "pose": "cast",
+   "groggy": 6,
+   "behavior": {
+    "type": "buff",
+    "duration": 8,
+    "mods": {
+     "attack_speed": 0.3
+    },
+    "flags": [
+     "superarmor"
+    ]
+   },
+   "lv5": {
+    "duration": 12
+   }
+  },
+  {
+   "id": "gs_meteor_drop",
+   "name": "낙하 강타",
+   "cls": "greatsword",
+   "tier": "master",
+   "stamina": 40,
+   "cooldown": 15,
+   "mult_text": "600%",
+   "desc": "도약해서 지정 위치에 내리찍음, 도약 중 무적",
+   "lv5_desc": "착지 지점 주변 적 띄움",
+   "pose": "smash",
+   "groggy": 6,
+   "behavior": {
+    "type": "leap",
+    "distance": 4,
+    "duration": 0.45,
+    "radius": 1.8,
+    "mult": 6.0,
+    "invuln": true
+   },
+   "lv5": {
+    "effects": [
+     {
+      "status": "airborne",
+      "duration": 1.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "gs_mountain_splitter",
+   "name": "산을 쪼개는 일격",
+   "cls": "greatsword",
+   "tier": "meridian",
+   "stamina": 60,
+   "cooldown": 30,
+   "mult_text": "최대 1500%",
+   "desc": "최대 2초 충전, 충전 시간에 따라 피해·범위 증가",
+   "lv5_desc": "충전 중 받는 피해 -70%",
+   "pose": "smash",
+   "groggy": 8,
+   "behavior": {
+    "type": "charge_slam",
+    "max_charge": 2.0,
+    "min_mult": 5.0,
+    "mult": 15.0,
+    "min_radius": 1.5,
+    "radius": 4.0
+   },
+   "lv5": {
+    "charge_reduction": 0.7
+   }
+  },
+  {
+   "id": "gs_giant_dance",
+   "name": "거인의 춤",
+   "cls": "greatsword",
+   "tier": "meridian",
+   "stamina": 55,
+   "cooldown": 35,
+   "mult_text": "300%×5",
+   "desc": "회전하며 내리찍기 5연속, 각 타에 충격파",
+   "lv5_desc": "마지막 타 범위 2배",
+   "pose": "spin",
+   "groggy": 8,
+   "behavior": {
+    "type": "multi_slam",
+    "hits": 5,
+    "interval": 0.32,
+    "radius": 1.8,
+    "mult": 3.0,
+    "step": 0.6,
+    "superarmor": true
+   },
+   "lv5": {
+    "last_radius_mult": 2.0
+   }
+  },
+  {
+   "id": "dg_rapid_stab",
+   "name": "연속 찌르기",
+   "cls": "dagger",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 3,
+   "mult_text": "45%×6",
+   "desc": "전방 빠른 6연타",
+   "lv5_desc": "9연타",
+   "pose": "thrust",
+   "groggy": 3,
+   "behavior": {
+    "type": "strike",
+    "shape": "line",
+    "range": 1.6,
+    "width": 0.9,
+    "mult": 0.45,
+    "hits": 6,
+    "interval": 0.05
+   },
+   "lv5": {
+    "hits": 9
+   }
+  },
+  {
+   "id": "dg_shadow_step",
+   "name": "그림자 걸음",
+   "cls": "dagger",
+   "tier": "old",
+   "stamina": 10,
+   "cooldown": 5,
+   "mult_text": "—",
+   "desc": "가까운 적 뒤로 순간이동, 다음 공격 치명타 확정",
+   "lv5_desc": "초기화 확률 30%",
+   "pose": "cast",
+   "groggy": 3,
+   "behavior": {
+    "type": "teleport_behind",
+    "radius": 6,
+    "mult": 0.0,
+    "next_crit": true
+   },
+   "lv5": {
+    "reset_chance": 0.3
+   }
+  },
+  {
+   "id": "dg_poison_coat",
+   "name": "독 바르기",
+   "cls": "dagger",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 20,
+   "mult_text": "—",
+   "desc": "10초간 적중 시 중독",
+   "lv5_desc": "중독 피해 2배",
+   "pose": "cast",
+   "groggy": 5,
+   "behavior": {
+    "type": "buff",
+    "duration": 10,
+    "on_hit_status": "poison"
+   },
+   "lv5": {
+    "poison_mult": 2.0
+   }
+  },
+  {
+   "id": "dg_fan_throw",
+   "name": "부채 투척",
+   "cls": "dagger",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 6,
+   "mult_text": "90%×5",
+   "desc": "단검 5개를 부채꼴로 던짐",
+   "lv5_desc": "8개",
+   "pose": "shoot",
+   "groggy": 5,
+   "behavior": {
+    "type": "projectile",
+    "count": 5,
+    "spread": 50,
+    "speed": 300,
+    "range": 6,
+    "mult": 0.9,
+    "visual": "dagger"
+   },
+   "lv5": {
+    "count": 8
+   }
+  },
+  {
+   "id": "dg_cyclone",
+   "name": "회오리 칼날",
+   "cls": "dagger",
+   "tier": "master",
+   "stamina": 30,
+   "cooldown": 10,
+   "mult_text": "50%×8",
+   "desc": "회전하며 빠르게 이동, 닿는 적 연타",
+   "lv5_desc": "지나간 자리에 출혈",
+   "pose": "spin",
+   "groggy": 6,
+   "behavior": {
+    "type": "spin",
+    "radius": 1.4,
+    "hits": 8,
+    "duration": 0.8,
+    "mult": 0.5,
+    "move": 1.6,
+    "forced_move": true
+   },
+   "lv5": {
+    "trail_bleed": true
+   }
+  },
+  {
+   "id": "dg_assassinate",
+   "name": "암습",
+   "cls": "dagger",
+   "tier": "master",
+   "stamina": 35,
+   "cooldown": 12,
+   "mult_text": "500%",
+   "desc": "대상 뒤로 순간이동해 급소 찌르기, 뒤치기 판정",
+   "lv5_desc": "처치 시 쿨타임 초기화",
+   "pose": "thrust",
+   "groggy": 6,
+   "behavior": {
+    "type": "teleport_behind",
+    "radius": 6,
+    "mult": 5.0,
+    "backstab": true
+   },
+   "lv5": {
+    "kill_reset": true
+   }
+  },
+  {
+   "id": "dg_shadow_clones",
+   "name": "그림자 분신",
+   "cls": "dagger",
+   "tier": "meridian",
+   "stamina": 50,
+   "cooldown": 35,
+   "mult_text": "—",
+   "desc": "8초간 분신 2개가 내 공격을 따라함 (각 40%)",
+   "lv5_desc": "분신 3개",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "clones",
+    "duration": 8,
+    "count": 2,
+    "mult": 0.4
+   },
+   "lv5": {
+    "count": 3
+   }
+  },
+  {
+   "id": "dg_thousand_instants",
+   "name": "천 번의 찰나",
+   "cls": "dagger",
+   "tier": "meridian",
+   "stamina": 60,
+   "cooldown": 40,
+   "mult_text": "60%×15",
+   "desc": "화면 안 적들에게 순간이동 연격, 사용 중 무적",
+   "lv5_desc": "20연격",
+   "pose": "slash",
+   "groggy": 8,
+   "behavior": {
+    "type": "multi_teleport",
+    "hits": 15,
+    "interval": 0.06,
+    "radius": 20,
+    "mult": 0.6,
+    "invuln": true
+   },
+   "lv5": {
+    "hits": 20
+   }
+  },
+  {
+   "id": "sp_pierce",
+   "name": "관통 찌르기",
+   "cls": "spear",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 3,
+   "mult_text": "220%",
+   "desc": "전방 3칸 관통",
+   "lv5_desc": "사거리 5칸",
+   "pose": "thrust",
+   "groggy": 3,
+   "behavior": {
+    "type": "strike",
+    "shape": "line",
+    "range": 3,
+    "width": 0.9,
+    "mult": 2.2
+   },
+   "lv5": {
+    "range": 5
+   }
+  },
+  {
+   "id": "sp_charge",
+   "name": "돌격",
+   "cls": "spear",
+   "tier": "old",
+   "stamina": 20,
+   "cooldown": 6,
+   "mult_text": "150%",
+   "desc": "6칸 돌진, 적을 창끝에 걸고 밀어냄",
+   "lv5_desc": "끝에서 내리찍기 200%",
+   "pose": "thrust",
+   "groggy": 3,
+   "behavior": {
+    "type": "dash_strike",
+    "distance": 6,
+    "duration": 0.3,
+    "width": 1.2,
+    "mult": 1.5,
+    "carry": true,
+    "superarmor": true
+   },
+   "lv5": {
+    "end_mult": 2.0
+   }
+  },
+  {
+   "id": "sp_sweep",
+   "name": "휩쓸기",
+   "cls": "spear",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 6,
+   "mult_text": "180%",
+   "desc": "반원 휘두르기, 강한 넉백",
+   "lv5_desc": "넉백된 적 둔화",
+   "pose": "slash",
+   "groggy": 5,
+   "behavior": {
+    "type": "strike",
+    "shape": "arc",
+    "range": 2.5,
+    "angle": 180,
+    "mult": 1.8,
+    "knockback": 3.0
+   },
+   "lv5": {
+    "effects": [
+     {
+      "status": "slow",
+      "duration": 2.5
+     }
+    ]
+   }
+  },
+  {
+   "id": "sp_throw",
+   "name": "창 투척",
+   "cls": "spear",
+   "tier": "trainee",
+   "stamina": 25,
+   "cooldown": 8,
+   "mult_text": "300%",
+   "desc": "창을 던져 꽂음, 다시 누르면 당겨오며 피해",
+   "lv5_desc": "다시 당길 때 적도 끌려옴",
+   "pose": "shoot",
+   "groggy": 5,
+   "behavior": {
+    "type": "throw_recall",
+    "speed": 380,
+    "range": 8,
+    "mult": 3.0,
+    "recall_mult": 1.5,
+    "window": 4.0
+   },
+   "lv5": {
+    "pull": true
+   }
+  },
+  {
+   "id": "sp_pole_vault",
+   "name": "장대 도약",
+   "cls": "spear",
+   "tier": "master",
+   "stamina": 25,
+   "cooldown": 10,
+   "mult_text": "400%",
+   "desc": "창을 짚고 뛰어올랐다 착지, 공중에서 무적",
+   "lv5_desc": "착지 범위 2배",
+   "pose": "thrust",
+   "groggy": 6,
+   "behavior": {
+    "type": "leap",
+    "distance": 3.5,
+    "duration": 0.5,
+    "radius": 1.6,
+    "mult": 4.0,
+    "invuln": true
+   },
+   "lv5": {
+    "radius_mult": 2.0
+   }
+  },
+  {
+   "id": "sp_hundred_thrusts",
+   "name": "백열 연창",
+   "cls": "spear",
+   "tier": "master",
+   "stamina": 35,
+   "cooldown": 12,
+   "mult_text": "70%×10",
+   "desc": "제자리에서 초고속 찌르기",
+   "lv5_desc": "마지막에 관통 400%",
+   "pose": "thrust",
+   "groggy": 6,
+   "behavior": {
+    "type": "strike",
+    "shape": "line",
+    "range": 2.5,
+    "width": 1.0,
+    "mult": 0.7,
+    "hits": 10,
+    "interval": 0.05
+   },
+   "lv5": {
+    "final_beam_mult": 4.0
+   }
+  },
+  {
+   "id": "sp_horizon_pierce",
+   "name": "지평선 꿰뚫기",
+   "cls": "spear",
+   "tier": "meridian",
+   "stamina": 55,
+   "cooldown": 30,
+   "mult_text": "1200%",
+   "desc": "화면 끝까지 닿는 빛의 찌르기",
+   "lv5_desc": "적중한 적 2초 정지",
+   "pose": "thrust",
+   "groggy": 8,
+   "behavior": {
+    "type": "beam",
+    "length": 24,
+    "width": 1.4,
+    "mult": 12.0,
+    "delay": 0.2
+   },
+   "lv5": {
+    "effects": [
+     {
+      "status": "time_stop",
+      "duration": 2.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "sp_dragon_ascent",
+   "name": "용의 비상",
+   "cls": "spear",
+   "tier": "meridian",
+   "stamina": 60,
+   "cooldown": 35,
+   "mult_text": "200%×6",
+   "desc": "회오리 치는 창 3개를 소환해 주변을 휩쓸음",
+   "lv5_desc": "창 5개",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "aura",
+    "radius": 3.0,
+    "duration": 2.4,
+    "hits": 6,
+    "mult": 2.0,
+    "visual": "spears",
+    "count": 3,
+    "follow": false
+   },
+   "lv5": {
+    "count": 5
+   }
+  },
+  {
+   "id": "bw_rapid_fire",
+   "name": "속사",
+   "cls": "bow",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 3,
+   "mult_text": "70%×5",
+   "desc": "빠르게 5발 연사",
+   "lv5_desc": "8발",
+   "pose": "shoot",
+   "groggy": 3,
+   "behavior": {
+    "type": "projectile",
+    "count": 5,
+    "interval": 0.07,
+    "spread": 4,
+    "speed": 420,
+    "range": 9,
+    "mult": 0.7,
+    "visual": "arrow"
+   },
+   "lv5": {
+    "count": 8
+   }
+  },
+  {
+   "id": "bw_backstep_shot",
+   "name": "뒤로 도약 사격",
+   "cls": "bow",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 5,
+   "mult_text": "200%",
+   "desc": "뒤로 크게 물러나며 강한 한 발, 무적 0.2초",
+   "lv5_desc": "3발로 갈라짐",
+   "pose": "shoot",
+   "groggy": 3,
+   "behavior": {
+    "type": "backstep_shot",
+    "distance": 3,
+    "duration": 0.2,
+    "invuln": 0.2,
+    "mult": 2.0,
+    "speed": 460,
+    "range": 9
+   },
+   "lv5": {
+    "count": 3
+   }
+  },
+  {
+   "id": "bw_spread_shot",
+   "name": "확산 사격",
+   "cls": "bow",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 6,
+   "mult_text": "90%×5",
+   "desc": "부채꼴 5발",
+   "lv5_desc": "7발, 넉백",
+   "pose": "shoot",
+   "groggy": 5,
+   "behavior": {
+    "type": "projectile",
+    "count": 5,
+    "spread": 45,
+    "speed": 400,
+    "range": 8,
+    "mult": 0.9,
+    "visual": "arrow"
+   },
+   "lv5": {
+    "count": 7,
+    "knockback": 1.5
+   }
+  },
+  {
+   "id": "bw_trap",
+   "name": "덫 화살",
+   "cls": "bow",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 10,
+   "mult_text": "250%",
+   "desc": "바닥에 덫, 밟은 적 속박 2초",
+   "lv5_desc": "덫 2개 동시 설치",
+   "pose": "shoot",
+   "groggy": 5,
+   "behavior": {
+    "type": "trap",
+    "distance": 2.5,
+    "radius": 0.9,
+    "mult": 2.5,
+    "duration": 15,
+    "effects": [
+     {
+      "status": "root",
+      "duration": 2.0
+     }
+    ]
+   },
+   "lv5": {
+    "count": 2
+   }
+  },
+  {
+   "id": "bw_snipe",
+   "name": "관통 저격",
+   "cls": "bow",
+   "tier": "master",
+   "stamina": 30,
+   "cooldown": 10,
+   "mult_text": "600%",
+   "desc": "1초 조준 후 모든 적을 관통하는 저격",
+   "lv5_desc": "조준 0.5초",
+   "pose": "shoot",
+   "groggy": 6,
+   "behavior": {
+    "type": "aimed_shot",
+    "aim": 1.0,
+    "mult": 6.0,
+    "speed": 900,
+    "range": 24,
+    "pierce": 99
+   },
+   "lv5": {
+    "aim": 0.5
+   }
+  },
+  {
+   "id": "bw_arrow_rain",
+   "name": "화살비",
+   "cls": "bow",
+   "tier": "master",
+   "stamina": 35,
+   "cooldown": 14,
+   "mult_text": "50%×12",
+   "desc": "전방 범위에 3초간 화살비",
+   "lv5_desc": "범위 안 적 둔화",
+   "pose": "shoot",
+   "groggy": 6,
+   "behavior": {
+    "type": "zone",
+    "distance": 4,
+    "radius": 2.5,
+    "duration": 3.0,
+    "hits": 12,
+    "mult": 0.5,
+    "visual": "arrows"
+   },
+   "lv5": {
+    "effects": [
+     {
+      "status": "slow",
+      "duration": 1.0
+     }
+    ]
+   }
+  },
+  {
+   "id": "bw_starfall",
+   "name": "별빛 낙하",
+   "cls": "bow",
+   "tier": "meridian",
+   "stamina": 55,
+   "cooldown": 30,
+   "mult_text": "1500%",
+   "desc": "하늘에서 거대한 빛의 화살이 떨어짐",
+   "lv5_desc": "착탄 후 빛 장판 3초",
+   "pose": "shoot",
+   "groggy": 8,
+   "behavior": {
+    "type": "zone",
+    "distance": 5,
+    "radius": 2.6,
+    "delay": 0.7,
+    "hits": 1,
+    "mult": 15.0,
+    "visual": "star"
+   },
+   "lv5": {
+    "after_zone": 3.0
+   }
+  },
+  {
+   "id": "bw_frozen_arrows",
+   "name": "멈춘 화살들",
+   "cls": "bow",
+   "tier": "meridian",
+   "stamina": 60,
+   "cooldown": 40,
+   "mult_text": "120%×쌓인 수",
+   "desc": "3초간 쏜 화살이 공중에 멈춰 있다가 끝나면 일제히 날아감",
+   "lv5_desc": "지속 5초",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "frozen_arrows",
+    "duration": 3.0,
+    "mult": 1.2
+   },
+   "lv5": {
+    "duration": 5.0
+   }
+  },
+  {
+   "id": "st_fireball",
+   "name": "화염구",
+   "cls": "staff",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 3,
+   "mult_text": "250%",
+   "desc": "날아가 폭발, 화상",
+   "lv5_desc": "폭발 범위 +50%",
+   "pose": "cast",
+   "groggy": 3,
+   "behavior": {
+    "type": "projectile",
+    "count": 1,
+    "speed": 260,
+    "range": 7,
+    "mult": 2.5,
+    "explode": 1.4,
+    "visual": "fireball",
+    "effects": [
+     {
+      "status": "burn",
+      "duration": 3
+     }
+    ]
+   },
+   "lv5": {
+    "explode_mult": 1.5
+   }
+  },
+  {
+   "id": "st_frost_arrows",
+   "name": "서리 화살",
+   "cls": "staff",
+   "tier": "old",
+   "stamina": 15,
+   "cooldown": 4,
+   "mult_text": "120%×3",
+   "desc": "냉기 화살 3발, 둔화",
+   "lv5_desc": "3회 적중 시 빙결",
+   "pose": "cast",
+   "groggy": 3,
+   "behavior": {
+    "type": "projectile",
+    "count": 3,
+    "interval": 0.08,
+    "spread": 6,
+    "speed": 380,
+    "range": 8,
+    "mult": 1.2,
+    "visual": "frost",
+    "effects": [
+     {
+      "status": "slow",
+      "duration": 2.5
+     }
+    ]
+   },
+   "lv5": {
+    "freeze_on_3": true
+   }
+  },
+  {
+   "id": "st_chain_lightning",
+   "name": "번개 사슬",
+   "cls": "staff",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 6,
+   "mult_text": "150%",
+   "desc": "적 4명에게 튕기는 번개",
+   "lv5_desc": "7명",
+   "pose": "cast",
+   "groggy": 5,
+   "behavior": {
+    "type": "chain",
+    "targets": 4,
+    "range": 6,
+    "jump": 4,
+    "mult": 1.5
+   },
+   "lv5": {
+    "targets": 7
+   }
+  },
+  {
+   "id": "st_mana_shield",
+   "name": "마력 보호막",
+   "cls": "staff",
+   "tier": "trainee",
+   "stamina": 20,
+   "cooldown": 15,
+   "mult_text": "—",
+   "desc": "5초간 최대 HP 20%만큼 피해 흡수",
+   "lv5_desc": "깨지면 주변 폭발 300%",
+   "pose": "cast",
+   "groggy": 5,
+   "behavior": {
+    "type": "shield",
+    "duration": 5,
+    "amount": 0.2
+   },
+   "lv5": {
+    "break_mult": 3.0
+   }
+  },
+  {
+   "id": "st_blink",
+   "name": "블링크",
+   "cls": "staff",
+   "tier": "master",
+   "stamina": 10,
+   "cooldown": 4,
+   "mult_text": "—",
+   "desc": "바라보는 방향 5칸 순간이동",
+   "lv5_desc": "연속 2회",
+   "pose": "cast",
+   "groggy": 6,
+   "behavior": {
+    "type": "blink",
+    "distance": 5
+   },
+   "lv5": {
+    "charges": 2
+   }
+  },
+  {
+   "id": "st_meteor",
+   "name": "유성",
+   "cls": "staff",
+   "tier": "master",
+   "stamina": 40,
+   "cooldown": 14,
+   "mult_text": "700%",
+   "desc": "1초 뒤 지정 범위에 유성 낙하",
+   "lv5_desc": "작은 유성 3개 추가",
+   "pose": "cast",
+   "groggy": 6,
+   "behavior": {
+    "type": "zone",
+    "distance": 4,
+    "radius": 2.0,
+    "delay": 1.0,
+    "hits": 1,
+    "mult": 7.0,
+    "visual": "meteor"
+   },
+   "lv5": {
+    "extra_meteors": 3
+   }
+  },
+  {
+   "id": "st_black_hole",
+   "name": "블랙홀",
+   "cls": "staff",
+   "tier": "meridian",
+   "stamina": 55,
+   "cooldown": 35,
+   "mult_text": "100%×8 + 600%",
+   "desc": "4초간 적을 끌어당기다 폭발",
+   "lv5_desc": "끌어당기는 범위 2배",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "zone",
+    "distance": 4,
+    "radius": 3.0,
+    "duration": 4.0,
+    "hits": 8,
+    "mult": 1.0,
+    "pull": 1.2,
+    "end_mult": 6.0,
+    "visual": "blackhole"
+   },
+   "lv5": {
+    "radius_mult": 2.0
+   }
+  },
+  {
+   "id": "st_sun_descent",
+   "name": "태양 강림",
+   "cls": "staff",
+   "tier": "meridian",
+   "stamina": 60,
+   "cooldown": 40,
+   "mult_text": "초당 150%",
+   "desc": "6초간 태양 구체가 나를 따라다니며 주변을 태움",
+   "lv5_desc": "지속 9초",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "aura",
+    "radius": 2.2,
+    "duration": 6.0,
+    "hits": 6,
+    "mult": 1.5,
+    "visual": "sun",
+    "follow": true,
+    "light": true
+   },
+   "lv5": {
+    "duration": 9.0,
+    "hits": 9
+   }
+  },
+  {
+   "id": "ch_slow_field",
+   "name": "감속장",
+   "cls": "chrono",
+   "tier": "chrono",
+   "stamina": 20,
+   "cooldown": 25,
+   "mult_text": "—",
+   "desc": "5초간 내 주변 원 안의 적 속도 -50% (보스 -25%)",
+   "lv5_desc": "",
+   "pose": "cast",
+   "groggy": 0,
+   "behavior": {
+    "type": "slow_field",
+    "duration": 5,
+    "radius": 4,
+    "slow": 0.5,
+    "boss_slow": 0.25
+   },
+   "lv5": {},
+   "req_level": 10
+  },
+  {
+   "id": "ch_haste",
+   "name": "가속",
+   "cls": "chrono",
+   "tier": "chrono",
+   "stamina": 20,
+   "cooldown": 30,
+   "mult_text": "—",
+   "desc": "6초간 내 공격·이동속도 +30%",
+   "lv5_desc": "",
+   "pose": "cast",
+   "groggy": 0,
+   "behavior": {
+    "type": "buff",
+    "duration": 6,
+    "mods": {
+     "attack_speed": 0.3,
+     "move_pct": 0.3
+    }
+   },
+   "lv5": {},
+   "req_level": 20
+  },
+  {
+   "id": "ch_rewind",
+   "name": "되감기",
+   "cls": "chrono",
+   "tier": "chrono",
+   "stamina": 0,
+   "cooldown": 60,
+   "mult_text": "—",
+   "desc": "3초 전 위치와 HP로 되돌아감",
+   "lv5_desc": "",
+   "pose": "cast",
+   "groggy": 0,
+   "behavior": {
+    "type": "rewind",
+    "seconds": 3
+   },
+   "lv5": {},
+   "req_level": 30
+  },
+  {
+   "id": "ch_afterimage",
+   "name": "잔상",
+   "cls": "chrono",
+   "tier": "chrono",
+   "stamina": 25,
+   "cooldown": 30,
+   "mult_text": "—",
+   "desc": "8초간 내가 쓴 스킬이 1초 뒤 50% 위력으로 한 번 더",
+   "lv5_desc": "",
+   "pose": "cast",
+   "groggy": 0,
+   "behavior": {
+    "type": "echo",
+    "duration": 8,
+    "delay": 1.0,
+    "mult": 0.5
+   },
+   "lv5": {},
+   "req_level": 40
+  },
+  {
+   "id": "ch_time_stop",
+   "name": "시간 정지",
+   "cls": "chrono",
+   "tier": "chrono",
+   "stamina": 50,
+   "cooldown": 90,
+   "mult_text": "—",
+   "desc": "2초간 화면 안의 적 정지 (보스는 1초), 그동안 내 공격 피해 누적 후 해제 시 한꺼번에",
+   "lv5_desc": "",
+   "pose": "cast",
+   "groggy": 0,
+   "behavior": {
+    "type": "time_stop",
+    "duration": 2,
+    "boss_duration": 1
+   },
+   "lv5": {},
+   "req_level": 50
+  },
+  {
+   "id": "ch_chrono_burst",
+   "name": "크로노 폭발",
+   "cls": "chrono",
+   "tier": "chrono",
+   "stamina": 60,
+   "cooldown": 60,
+   "mult_text": "소모 기력×20%",
+   "desc": "모인 기력을 전부 쓰고 주변에 결정 폭발 (소모 기력 × 20%)",
+   "lv5_desc": "",
+   "pose": "cast",
+   "groggy": 8,
+   "behavior": {
+    "type": "chrono_burst",
+    "radius": 3.5,
+    "per_stamina": 0.2
+   },
+   "lv5": {},
+   "req_level": 60
+  }
+ ]
+}

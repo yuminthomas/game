@@ -1,0 +1,723 @@
+{
+ "_comment": "GDD 7-4 무기 목록. attack 은 기획서 표 값. 공식 (10 + 요구레벨×2.2) × 등급배율 × 무기군계수 와 다르면 Data 검증이 경고한다.",
+ "weapons": [
+  {
+   "id": "sword_old_meridian",
+   "name": "낡은 메리디안검",
+   "class": "sword",
+   "grade": "common",
+   "level": 1,
+   "attack": 12,
+   "design": "이 빠진 강철 칼날, 가죽이 풀린 손잡이. 플레이어가 처음 쥐는 검"
+  },
+  {
+   "id": "sword_patrol",
+   "name": "순찰병의 검",
+   "class": "sword",
+   "grade": "common",
+   "level": 10,
+   "attack": 32,
+   "design": "청동 코등이와 깔끔한 직검. 메리디안 경비병 제식"
+  },
+  {
+   "id": "sword_wildflower",
+   "name": "들꽃 세이버",
+   "class": "sword",
+   "grade": "rare",
+   "level": 15,
+   "attack": 54,
+   "design": "살짝 휘어진 칼날, 손잡이에 마른 들꽃을 엮어 감음"
+  },
+  {
+   "id": "sword_steel_long",
+   "name": "강철 장검",
+   "class": "sword",
+   "grade": "rare",
+   "level": 25,
+   "attack": 81,
+   "design": "폭이 넓고 두툼한 장검, 사슬 수실"
+  },
+  {
+   "id": "sword_dusk_oath",
+   "name": "황혼의 맹세",
+   "class": "sword",
+   "grade": "epic",
+   "level": 30,
+   "attack": 122,
+   "design": "석양빛 주황 칼날, 휘두르면 주황 궤적이 길게 남음",
+   "unique": {
+    "type": "just_dodge_next_attack",
+    "desc": "저스트 회피 후 다음 공격 피해 +40%",
+    "params": {
+     "bonus": 0.4
+    }
+   }
+  },
+  {
+   "id": "sword_silver_moon",
+   "name": "은달검",
+   "class": "sword",
+   "grade": "epic",
+   "level": 40,
+   "attack": 157,
+   "design": "푸른빛 은날. 어두운 곳에서 은은히 빛나는 광원",
+   "unique": {
+    "type": "crit_stamina",
+    "desc": "치명타 시 기력 +5",
+    "params": {
+     "amount": 5
+    }
+   }
+  },
+  {
+   "id": "sword_eternal_witness",
+   "name": "영원의 증인",
+   "class": "sword",
+   "grade": "legendary",
+   "level": 45,
+   "attack": 218,
+   "design": "시계 바늘처럼 가늘고 긴 금빛 칼날, 따라오는 반투명 잔상",
+   "unique": {
+    "type": "finisher_echo",
+    "desc": "콤보 마지막 타가 0.5초 뒤 잔상으로 한 번 더 들어감 (60%)",
+    "params": {
+     "delay": 0.5,
+     "mult": 0.6
+    }
+   }
+  },
+  {
+   "id": "sword_phoenix_plume",
+   "name": "불사조의 깃",
+   "class": "sword",
+   "grade": "legendary",
+   "level": 55,
+   "attack": 262,
+   "design": "불꽃 깃털 모양 칼날, 가만히 있어도 불티가 흩날림",
+   "unique": {
+    "type": "revive",
+    "desc": "HP가 0이 되면 HP 30%로 1회 부활 (쿨타임 300초)",
+    "params": {
+     "hp": 0.3,
+     "cooldown": 300
+    }
+   }
+  },
+  {
+   "id": "sword_aurelian_royal",
+   "name": "아우렐리안의 왕검",
+   "class": "sword",
+   "grade": "mythic",
+   "level": 60,
+   "attack": 355,
+   "design": "금과 흰 결정으로 된 메리디안 왕실의 검. 휘두를 때 아주 희미하게 여러 사람의 얼굴이 비침",
+   "unique": {
+    "type": "steal_time",
+    "desc": "적중 시 적의 시간을 훔쳐 공격·이동속도 +2% (최대 10중첩, 5초)",
+    "params": {
+     "per_stack": 0.02,
+     "max_stacks": 10,
+     "duration": 5
+    }
+   }
+  },
+  {
+   "id": "gs_iron_slab",
+   "name": "무거운 철판검",
+   "class": "greatsword",
+   "grade": "common",
+   "level": 1,
+   "attack": 17,
+   "design": "날이라기보다 쓰기 좋게 다듬은 두꺼운 철판"
+  },
+  {
+   "id": "gs_rampart",
+   "name": "성벽 수비대 대검",
+   "class": "greatsword",
+   "grade": "common",
+   "level": 10,
+   "attack": 46,
+   "design": "크고 직선적인 대검, 가드에 문장 없는 매끈한 동그라미"
+  },
+  {
+   "id": "gs_rockcarver",
+   "name": "바위깎이",
+   "class": "greatsword",
+   "grade": "rare",
+   "level": 15,
+   "attack": 78,
+   "design": "돌을 깎아 만든 듯 거친 회색 칼날"
+  },
+  {
+   "id": "gs_claymore",
+   "name": "쌍날 클레이모어",
+   "class": "greatsword",
+   "grade": "rare",
+   "level": 25,
+   "attack": 117,
+   "design": "길고 양날이 선 클레이모어, 너덜너덜한 가죽 띠"
+  },
+  {
+   "id": "gs_quake_weight",
+   "name": "지진의 무게",
+   "class": "greatsword",
+   "grade": "epic",
+   "level": 30,
+   "attack": 177,
+   "design": "갈라진 바위 무늬 칼날, 내리찍으면 땅에 균열 이펙트",
+   "unique": {
+    "type": "charge_shockwave_radius",
+    "desc": "최대 충전 공격의 충격파 범위 +50%",
+    "params": {
+     "bonus": 0.5
+    }
+   }
+  },
+  {
+   "id": "gs_frost_fang",
+   "name": "서리 이빨",
+   "class": "greatsword",
+   "grade": "epic",
+   "level": 40,
+   "attack": 228,
+   "design": "흰 모래빛 칼날에 얼음 이빨 같은 톱날, 차가운 냉기 입자",
+   "unique": {
+    "type": "on_hit_status",
+    "desc": "적중 시 20% 확률로 2초 둔화",
+    "params": {
+     "status": "slow",
+     "chance": 0.2,
+     "duration": 2
+    }
+   }
+  },
+  {
+   "id": "gs_sun_eater",
+   "name": "해 삼키는 자",
+   "class": "greatsword",
+   "grade": "legendary",
+   "level": 45,
+   "attack": 316,
+   "design": "검게 타버린 칼날 안에 작은 태양이 들어 있음. 충전할수록 밝게 타오름",
+   "unique": {
+    "type": "charge_guard",
+    "desc": "충전 중 받는 피해 -50%, 최대 충전 피해 +80%",
+    "params": {
+     "reduction": 0.5,
+     "bonus": 0.8
+    }
+   }
+  },
+  {
+   "id": "gs_fallen_tower",
+   "name": "무너진 탑",
+   "class": "greatsword",
+   "grade": "legendary",
+   "level": 55,
+   "attack": 380,
+   "design": "오래된 석조 탑의 기둥을 통째로 자른 듯한 대검",
+   "unique": {
+    "type": "finisher_rocks",
+    "desc": "콤보 마지막 타에 주변으로 낙석 3개 (각 120%)",
+    "params": {
+     "count": 3,
+     "mult": 1.2
+    }
+   }
+  },
+  {
+   "id": "gs_doomsday_hand",
+   "name": "종말의 시곗바늘",
+   "class": "greatsword",
+   "grade": "mythic",
+   "level": 60,
+   "attack": 515,
+   "design": "거대한 시계 바늘 모양, 휘두를 때마다 딸깍거리는 소리",
+   "unique": {
+    "type": "charge_time_stop",
+    "desc": "최대 충전 공격 시 범위 내 적의 시간 1.5초 정지 (보스는 50% 둔화)",
+    "params": {
+     "duration": 1.5,
+     "boss_slow": 0.5
+    }
+   }
+  },
+  {
+   "id": "dg_hunting",
+   "name": "사냥용 단도",
+   "class": "dagger",
+   "grade": "common",
+   "level": 1,
+   "attack": 8,
+   "design": "나무 손잡이의 짧은 사냥칼"
+  },
+  {
+   "id": "dg_double_edge",
+   "name": "쌍날 단검",
+   "class": "dagger",
+   "grade": "common",
+   "level": 10,
+   "attack": 22,
+   "design": "양날이 선 검은 가죽 손잡이 단검"
+  },
+  {
+   "id": "dg_viper_fang",
+   "name": "독사 송곳니",
+   "class": "dagger",
+   "grade": "rare",
+   "level": 15,
+   "attack": 38,
+   "design": "초록빛 도는 휘어진 칼날"
+  },
+  {
+   "id": "dg_shadow",
+   "name": "그림자 칼",
+   "class": "dagger",
+   "grade": "rare",
+   "level": 25,
+   "attack": 57,
+   "design": "빛을 반사하지 않는 무광 검은 칼날"
+  },
+  {
+   "id": "dg_firefly",
+   "name": "반딧불",
+   "class": "dagger",
+   "grade": "epic",
+   "level": 30,
+   "attack": 85,
+   "design": "연두빛으로 은은히 발광. 움직이면 빛 가루가 남음",
+   "unique": {
+    "type": "dash_trail_damage",
+    "desc": "대시로 지나간 자리의 적에게 피해 50%",
+    "params": {
+     "mult": 0.5
+    }
+   }
+  },
+  {
+   "id": "dg_crow_talon",
+   "name": "까마귀 발톱",
+   "class": "dagger",
+   "grade": "epic",
+   "level": 40,
+   "attack": 110,
+   "design": "갈고리처럼 휘어진 검은 칼날, 손잡이에 검은 깃털",
+   "unique": {
+    "type": "backstab_crit",
+    "desc": "뒤에서 공격 시 치명타 확률 +30%",
+    "params": {
+     "bonus": 0.3
+    }
+   }
+  },
+  {
+   "id": "dg_instant",
+   "name": "찰나",
+   "class": "dagger",
+   "grade": "legendary",
+   "level": 45,
+   "attack": 153,
+   "design": "유리처럼 투명한 칼날, 각도에 따라 무지개빛 반사",
+   "unique": {
+    "type": "just_dodge_all_crit",
+    "desc": "저스트 회피 성공 시 2초간 모든 공격 치명타",
+    "params": {
+     "duration": 2
+    }
+   }
+  },
+  {
+   "id": "dg_wolf_king",
+   "name": "늑대왕의 이빨",
+   "class": "dagger",
+   "grade": "legendary",
+   "level": 55,
+   "attack": 183,
+   "design": "거대한 송곳니를 그대로 갈아 만든 쌍단검",
+   "unique": {
+    "type": "bleed_master",
+    "desc": "출혈 최대 중첩 5→8, 출혈 피해 +50%",
+    "params": {
+     "max_stacks": 8,
+     "bonus": 0.5
+    }
+   }
+  },
+  {
+   "id": "dg_last_second",
+   "name": "마지막 1초",
+   "class": "dagger",
+   "grade": "mythic",
+   "level": 60,
+   "attack": 249,
+   "design": "모래시계가 든 손잡이, 모래가 다 떨어지면 칼날이 빛남",
+   "unique": {
+    "type": "execute",
+    "desc": "HP 30% 이하 적에게 피해 +50%, 처치 시 대시 충전 즉시 회복",
+    "params": {
+     "threshold": 0.3,
+     "bonus": 0.5
+    }
+   }
+  },
+  {
+   "id": "sp_farmer_fork",
+   "name": "농부의 갈퀴창",
+   "class": "spear",
+   "grade": "common",
+   "level": 1,
+   "attack": 13,
+   "design": "갈퀴를 펴서 만든 조잡한 창"
+  },
+  {
+   "id": "sp_guard",
+   "name": "경비병의 창",
+   "class": "spear",
+   "grade": "common",
+   "level": 10,
+   "attack": 35,
+   "design": "길고 곧은 나무 자루, 잿빛 창날"
+  },
+  {
+   "id": "sp_river_harpoon",
+   "name": "강물 작살",
+   "class": "spear",
+   "grade": "rare",
+   "level": 15,
+   "attack": 59,
+   "design": "갈고리가 달린 세 갈래 작살"
+  },
+  {
+   "id": "sp_lance",
+   "name": "기병창",
+   "class": "spear",
+   "grade": "rare",
+   "level": 25,
+   "attack": 89,
+   "design": "두꺼운 원뿔 모양의 크고 두툼한 창"
+  },
+  {
+   "id": "sp_waterfall",
+   "name": "폭포 꿰뚫기",
+   "class": "spear",
+   "grade": "epic",
+   "level": 30,
+   "attack": 134,
+   "design": "물줄기가 휘감긴 푸른 창날, 찌르면 물보라",
+   "unique": {
+    "type": "extra_pierce",
+    "desc": "찌르기 공격이 적 2명을 추가 관통",
+    "params": {
+     "count": 2
+    }
+   }
+  },
+  {
+   "id": "sp_desert_wind",
+   "name": "사막 바람",
+   "class": "spear",
+   "grade": "epic",
+   "level": 40,
+   "attack": 173,
+   "design": "모래빛 천이 바람에 휘날리는 창",
+   "unique": {
+    "type": "dash_attack_boost",
+    "desc": "돌진 거리 +50%, 돌진 후 1초간 이동속도 +20%",
+    "params": {
+     "distance": 0.5,
+     "move": 0.2,
+     "duration": 1
+    }
+   }
+  },
+  {
+   "id": "sp_thunder_branch",
+   "name": "천둥의 가지",
+   "class": "spear",
+   "grade": "legendary",
+   "level": 45,
+   "attack": 240,
+   "design": "번개처럼 갈라진 창날, 파지직거리는 전기 입자",
+   "unique": {
+    "type": "nth_hit_lightning",
+    "desc": "3번째 적중마다 낙뢰 (150%)",
+    "params": {
+     "n": 3,
+     "mult": 1.5
+    }
+   }
+  },
+  {
+   "id": "sp_star_skewer",
+   "name": "별을 꿴 창",
+   "class": "spear",
+   "grade": "legendary",
+   "level": 55,
+   "attack": 288,
+   "design": "창끝에 작은 빛 구슬이 모여 도는 창",
+   "unique": {
+    "type": "kill_star_beam",
+    "desc": "처치 시 별 1개 충전, 3개가 되면 다음 찌르기가 거대 광선 (600%)",
+    "params": {
+     "stars": 3,
+     "mult": 6.0
+    }
+   }
+  },
+  {
+   "id": "sp_horizon",
+   "name": "지평선",
+   "class": "spear",
+   "grade": "mythic",
+   "level": 60,
+   "attack": 391,
+   "design": "끝이 빛으로 흐려져 보이지 않을 만큼 긴 창",
+   "unique": {
+    "type": "long_reach",
+    "desc": "찌르기 사거리 2배, 멀수록 피해 증가 (최대 +60%)",
+    "params": {
+     "range": 2.0,
+     "max_bonus": 0.6
+    }
+   }
+  },
+  {
+   "id": "bw_hunter_short",
+   "name": "사냥꾼의 짧은활",
+   "class": "bow",
+   "grade": "common",
+   "level": 1,
+   "attack": 11,
+   "design": "나뭇가지를 구부려 만든 작은 활"
+  },
+  {
+   "id": "bw_yew_long",
+   "name": "주목 장궁",
+   "class": "bow",
+   "grade": "common",
+   "level": 10,
+   "attack": 29,
+   "design": "붉은 빛 도는 길고 매끈한 장궁"
+  },
+  {
+   "id": "bw_breeze",
+   "name": "바람결 활",
+   "class": "bow",
+   "grade": "rare",
+   "level": 15,
+   "attack": 49,
+   "design": "활대 끝에 하얀 깃털 장식"
+  },
+  {
+   "id": "bw_twin_string",
+   "name": "쌍현 활",
+   "class": "bow",
+   "grade": "rare",
+   "level": 25,
+   "attack": 73,
+   "design": "시위가 두 줄인 두꺼운 복합궁"
+  },
+  {
+   "id": "bw_dawnlight",
+   "name": "새벽빛",
+   "class": "bow",
+   "grade": "epic",
+   "level": 30,
+   "attack": 110,
+   "design": "연분홍과 금빛이 섞인 활대, 화살이 빛의 꼬리를 남김",
+   "unique": {
+    "type": "first_hit_mark",
+    "desc": "화살이 빛을 남겨 어두운 곳을 밝힌다. 첫 적중 적에게 표식",
+    "params": {
+     "status": "mark"
+    }
+   }
+  },
+  {
+   "id": "bw_ice_string",
+   "name": "얼음 시위",
+   "class": "bow",
+   "grade": "epic",
+   "level": 40,
+   "attack": 141,
+   "design": "시위가 얼음으로 된 하얀 활",
+   "unique": {
+    "type": "charge_frost_burst",
+    "desc": "차지 샷 적중 시 냉기 폭발 (150%, 둔화)",
+    "params": {
+     "mult": 1.5,
+     "radius": 40
+    }
+   }
+  },
+  {
+   "id": "bw_meteor_shower",
+   "name": "유성우",
+   "class": "bow",
+   "grade": "legendary",
+   "level": 45,
+   "attack": 196,
+   "design": "밤하늘색 활대에 별빛 점들이 박혀 있음",
+   "unique": {
+    "type": "charge_arrow_rain",
+    "desc": "최대 차지 샷에 하늘에서 화살 5발이 추가로 떨어짐 (각 70%)",
+    "params": {
+     "count": 5,
+     "mult": 0.7
+    }
+   }
+  },
+  {
+   "id": "bw_butterfly_dream",
+   "name": "나비의 꿈",
+   "class": "bow",
+   "grade": "legendary",
+   "level": 55,
+   "attack": 236,
+   "design": "나비 날개 모양의 활, 화살이 나비 빛으로 흩어짐",
+   "unique": {
+    "type": "arrow_bounce",
+    "desc": "화살이 적 사이를 1회 튕김",
+    "params": {
+     "count": 1
+    }
+   }
+  },
+  {
+   "id": "bw_time_arrow",
+   "name": "시간 화살",
+   "class": "bow",
+   "grade": "mythic",
+   "level": 60,
+   "attack": 320,
+   "design": "시침과 분침 모양의 활대, 당길 때 작게 재깍이는 소리",
+   "unique": {
+    "type": "delayed_repeat",
+    "desc": "화살이 적중한 자리에 1초 뒤 같은 화살이 한 번 더 도착 (70%)",
+    "params": {
+     "delay": 1.0,
+     "mult": 0.7
+    }
+   }
+  },
+  {
+   "id": "st_apprentice",
+   "name": "견습생의 나무 지팡이",
+   "class": "staff",
+   "grade": "common",
+   "level": 1,
+   "attack": 14,
+   "design": "끝이 둥글게 말린 오래된 나무 지팡이"
+  },
+  {
+   "id": "st_crystal_tip",
+   "name": "수정 끝 지팡이",
+   "class": "staff",
+   "grade": "common",
+   "level": 10,
+   "attack": 37,
+   "design": "끝에 투명한 수정이 박힌 지팡이"
+  },
+  {
+   "id": "st_firefly_lamp",
+   "name": "반딧불 등불 지팡이",
+   "class": "staff",
+   "grade": "rare",
+   "level": 15,
+   "attack": 62,
+   "design": "끝에 작은 등불이 매달려 주변을 밝히는 광원"
+  },
+  {
+   "id": "st_frost_branch",
+   "name": "서리 가지",
+   "class": "staff",
+   "grade": "rare",
+   "level": 25,
+   "attack": 93,
+   "design": "서리가 내려앉은 하얀 나뭇가지"
+  },
+  {
+   "id": "st_winter_crown",
+   "name": "겨울 왕관",
+   "class": "staff",
+   "grade": "epic",
+   "level": 30,
+   "attack": 140,
+   "design": "끝에 얼음 결정이 왕관처럼 둘러서 있음",
+   "unique": {
+    "type": "triple_bolt",
+    "desc": "기본 마력탄이 3발 부채꼴로 나감",
+    "params": {
+     "count": 3,
+     "spread": 20
+    }
+   }
+  },
+  {
+   "id": "st_swamp_eye",
+   "name": "늪의 눈",
+   "class": "staff",
+   "grade": "epic",
+   "level": 40,
+   "attack": 181,
+   "design": "떠다니는 초록 눈알 구슬을 덩굴이 감싼 지팡이",
+   "unique": {
+    "type": "poison_pool",
+    "desc": "적중 시 독 장판 생성 (3초, 중독)",
+    "params": {
+     "duration": 3,
+     "radius": 24
+    }
+   }
+  },
+  {
+   "id": "st_sun_disc",
+   "name": "태양 원반",
+   "class": "staff",
+   "grade": "legendary",
+   "level": 45,
+   "attack": 251,
+   "design": "끝에 금빛 원반이 천천히 도는 홀, 강한 주황 광원",
+   "unique": {
+    "type": "charge_sun",
+    "desc": "차지 공격이 작은 태양 구체로 바뀜 (350%, 화상)",
+    "params": {
+     "mult": 3.5
+    }
+   }
+  },
+  {
+   "id": "st_abyss_lantern",
+   "name": "심연의 등불",
+   "class": "staff",
+   "grade": "legendary",
+   "level": 55,
+   "attack": 301,
+   "design": "보라 불꽃이 타오르는 랜턴을 단 지팡이",
+   "unique": {
+    "type": "free_skill",
+    "desc": "스킬 사용 시 30% 확률로 기력 소모 0",
+    "params": {
+     "chance": 0.3
+    }
+   }
+  },
+  {
+   "id": "st_meridian_scepter",
+   "name": "메리디안의 홀",
+   "class": "staff",
+   "grade": "mythic",
+   "level": 60,
+   "attack": 408,
+   "design": "일곱 개의 작은 결정이 링 모양으로 떠서 도는 홀. 크로놀리스 네트워크를 닮음",
+   "unique": {
+    "type": "crystal_ring",
+    "desc": "스킬 적중마다 홀 주위 작은 결정 하나가 빛나고, 7개가 모이면 대폭발 (1000%)",
+    "params": {
+     "count": 7,
+     "mult": 10.0
+    }
+   }
+  }
+ ]
+}

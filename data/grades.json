@@ -1,0 +1,163 @@
+{
+ "_comment": "GDD 7-2 등급. option_band: 추가 옵션 수치 범위를 등급별 구간으로 나눔 (decided)",
+ "grades": {
+  "common": {
+   "name": "일반",
+   "color": "#9c9c9c",
+   "mult": 1.0,
+   "options": 0,
+   "unique": false,
+   "drop_fx": "none",
+   "band": 0
+  },
+  "rare": {
+   "name": "희귀",
+   "color": "#4f8dff",
+   "mult": 1.25,
+   "options": 1,
+   "unique": false,
+   "drop_fx": "glow",
+   "band": 1
+  },
+  "epic": {
+   "name": "영웅",
+   "color": "#b45cff",
+   "mult": 1.6,
+   "options": 2,
+   "unique": true,
+   "drop_fx": "pillar",
+   "band": 2
+  },
+  "legendary": {
+   "name": "전설",
+   "color": "#ff8c1a",
+   "mult": 2.0,
+   "options": 3,
+   "unique": true,
+   "drop_fx": "pillar_sound",
+   "band": 3
+  },
+  "mythic": {
+   "name": "신화",
+   "color": "#ff3b3b",
+   "mult": 2.5,
+   "options": 4,
+   "unique": true,
+   "drop_fx": "pillar_screen",
+   "band": 4
+  },
+  "chrono": {
+   "name": "크로노",
+   "color": "#cfefff",
+   "mult": 0,
+   "options": 0,
+   "unique": false,
+   "drop_fx": "undecided",
+   "band": 4,
+   "undecided": true
+  }
+ },
+ "order": [
+  "common",
+  "rare",
+  "epic",
+  "legendary",
+  "mythic",
+  "chrono"
+ ],
+ "option_pool": [
+  {
+   "id": "attack_pct",
+   "name": "공격력",
+   "min": 3,
+   "max": 15,
+   "unit": "%"
+  },
+  {
+   "id": "crit_chance",
+   "name": "치명타 확률",
+   "min": 2,
+   "max": 8,
+   "unit": "%"
+  },
+  {
+   "id": "crit_damage",
+   "name": "치명타 피해",
+   "min": 5,
+   "max": 25,
+   "unit": "%"
+  },
+  {
+   "id": "attack_speed",
+   "name": "공격속도",
+   "min": 2,
+   "max": 8,
+   "unit": "%"
+  },
+  {
+   "id": "move_speed",
+   "name": "이동속도",
+   "min": 2,
+   "max": 6,
+   "unit": ""
+  },
+  {
+   "id": "stamina_gain",
+   "name": "기력 획득",
+   "min": 5,
+   "max": 20,
+   "unit": "%"
+  },
+  {
+   "id": "cdr",
+   "name": "쿨타임 감소",
+   "min": 2,
+   "max": 8,
+   "unit": "%"
+  },
+  {
+   "id": "max_hp_pct",
+   "name": "최대 HP",
+   "min": 3,
+   "max": 10,
+   "unit": "%"
+  },
+  {
+   "id": "boss_damage",
+   "name": "보스 피해",
+   "min": 5,
+   "max": 20,
+   "unit": "%"
+  },
+  {
+   "id": "groggy",
+   "name": "그로기 누적",
+   "min": 5,
+   "max": 20,
+   "unit": "%"
+  },
+  {
+   "id": "main_stat",
+   "name": "주스탯",
+   "min": 3,
+   "max": 20,
+   "unit": ""
+  },
+  {
+   "id": "chronoforce",
+   "name": "크로노포스",
+   "min": 5,
+   "max": 20,
+   "unit": "",
+   "min_grade": "epic"
+  }
+ ],
+ "slot_option_bias": {
+  "boots": {
+   "move_speed": 3
+  },
+  "gloves": {
+   "attack_speed": 3
+  }
+ }
+}

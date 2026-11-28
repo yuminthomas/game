@@ -1,0 +1,58 @@
+{
+ "_comment": "테스트용 몬스터. 실제 지역 몬스터는 3단계에서 추가.",
+ "monsters": {
+  "dummy": {
+   "name": "허수아비",
+   "level": 1,
+   "rank": "normal",
+   "hp_mult": 1000,
+   "atk_mult": 0,
+   "radius": 7,
+   "immovable": true,
+   "infinite": true
+  },
+  "test_brute": {
+   "name": "수련용 망령",
+   "level": 1,
+   "rank": "normal",
+   "hp_mult": 3,
+   "atk_mult": 2.0,
+   "radius": 7,
+   "speed": 55,
+   "attacks": [
+    {
+     "id": "lunge",
+     "telegraph": 0.5,
+     "range": 28,
+     "damage": 1.0,
+     "parry": true,
+     "weight": 5
+    },
+    {
+     "id": "heavy",
+     "telegraph": 0.9,
+     "range": 32,
+     "damage": 1.8,
+     "parry": false,
+     "unblockable": true,
+     "weight": 2
+    },
+    {
+     "id": "bolt",
+     "telegraph": 0.6,
+     "range": 120,
+     "damage": 0.8,
+     "projectile": true,
+     "parry": false,
+     "weight": 2
+    }
+   ],
+   "attack_cooldown": [
+    0.8,
+    1.6
+   ],
+   "exp_rank": "normal",
+   "_note": "(decided) atk_mult 2.0: GDD 6-5 '일반 몬스터 1타 피해 = 내 최대 HP의 8~12%'를 Lv1 기준으로 맞춤 (16 / 170 ≈ 9.4%)"
+  }
+ }
+}

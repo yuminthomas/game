@@ -1,0 +1,67 @@
+; Engine configuration file.
+config_version=5
+
+[application]
+
+config/name="크로놀리스 (CHRONOLITH)"
+config/description="탑뷰 2D 픽셀 액션 RPG"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+run/max_fps=60
+
+[autoload]
+
+Data="*res://autoload/data.gd"
+Text="*res://autoload/text.gd"
+Settings="*res://autoload/settings.gd"
+InputManager="*res://autoload/input_manager.gd"
+Clock="*res://autoload/clock.gd"
+Game="*res://autoload/game.gd"
+Fx="*res://autoload/fx.gd"
+DebugConsole="*res://autoload/debug_console.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+window/vsync/vsync_mode=1
+
+[gui]
+
+theme/custom_font="res://assets/fonts/Galmuri11.ttf"
+theme/default_font_antialiasing=0
+theme/default_font_hinting=0
+theme/default_font_subpixel_positioning=0
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=false
+
+[debug]
+
+gdscript/warnings/inference_on_variant=0
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_parameter=0
+gdscript/warnings/shadowed_variable=0
+gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=0
+gdscript/warnings/unused_signal=0
+gdscript/warnings/return_value_discarded=0
+gdscript/warnings/untyped_declaration=0
+
+[physics]
+
+common/physics_ticks_per_second=60
+2d/default_gravity=0.0
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=false
+environment/defaults/default_clear_color=Color(0.07, 0.07, 0.11, 1)

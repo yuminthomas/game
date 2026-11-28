@@ -1,0 +1,256 @@
+{
+ "_comment": "GDD 9장 방어구·소모품·재료·스킬서. 방어구 방어력은 공식으로 계산한다.",
+ "armor": [
+  {
+   "id": "ar_old_hood",
+   "name": "낡은 두건",
+   "slot": "helmet",
+   "grade": "common",
+   "level": 1,
+   "design": "해진 천 두건",
+   "look": {
+    "layer": "hood",
+    "color": "#6b5a44"
+   }
+  },
+  {
+   "id": "ar_wanderer_vest",
+   "name": "방랑자의 가죽 조끼",
+   "slot": "chest",
+   "grade": "common",
+   "level": 1,
+   "design": "낡은 가죽 조끼",
+   "look": {
+    "color": "#7a5434",
+    "cape": "short"
+   }
+  },
+  {
+   "id": "ar_field_gloves",
+   "name": "밭일 장갑",
+   "slot": "gloves",
+   "grade": "common",
+   "level": 1,
+   "look": {
+    "color": "#8a6a3a"
+   }
+  },
+  {
+   "id": "ar_traveler_boots",
+   "name": "여행자의 부츠",
+   "slot": "boots",
+   "grade": "common",
+   "level": 1,
+   "look": {
+    "color": "#4a3424"
+   }
+  },
+  {
+   "id": "ac_wildflower_ring",
+   "name": "들꽃 반지",
+   "slot": "ring",
+   "grade": "common",
+   "level": 1
+  },
+  {
+   "id": "ac_firefly_necklace",
+   "name": "반딧불 목걸이",
+   "slot": "necklace",
+   "grade": "rare",
+   "level": 8,
+   "special": "light",
+   "desc": "어두운 곳에서 내 주변을 밝히는 작은 광원"
+  },
+  {
+   "id": "ar_patrol_helm",
+   "name": "순찰병의 투구",
+   "slot": "helmet",
+   "grade": "rare",
+   "level": 10,
+   "look": {
+    "layer": "helm",
+    "color": "#b08a3a"
+   },
+   "_note": "(decided) 장비 외형 확인용 시험 방어구"
+  },
+  {
+   "id": "ar_patrol_mail",
+   "name": "순찰병의 사슬 갑옷",
+   "slot": "chest",
+   "grade": "rare",
+   "level": 10,
+   "look": {
+    "color": "#8c96a6",
+    "cape": "long"
+   },
+   "_note": "(decided) 장비 외형 확인용 시험 방어구"
+  }
+ ],
+ "consumables": [
+  {
+   "id": "potion",
+   "name": "회복 물약",
+   "desc": "최대 HP 40% 회복 (충전식, 쉼터에서 충전)",
+   "charges": true
+  },
+  {
+   "id": "herb_bundle",
+   "name": "약초 다발",
+   "desc": "최대 HP 15%를 5초에 걸쳐 회복",
+   "heal_pct": 0.15,
+   "duration": 5,
+   "max_stack": 10
+  },
+  {
+   "id": "stamina_candy",
+   "name": "기력 사탕",
+   "desc": "기력 +40",
+   "stamina": 40,
+   "max_stack": 99
+  },
+  {
+   "id": "return_sand",
+   "name": "귀환의 모래",
+   "desc": "마지막 쉼터로 순간이동",
+   "max_stack": 99
+  },
+  {
+   "id": "oblivion_sand",
+   "name": "망각의 모래",
+   "desc": "스탯 초기화",
+   "max_stack": 99
+  },
+  {
+   "id": "antidote",
+   "name": "해독제",
+   "desc": "중독·출혈 해제",
+   "cure": [
+    "poison",
+    "bleed"
+   ],
+   "max_stack": 99
+  }
+ ],
+ "materials": [
+  {
+   "id": "time_sand",
+   "name": "시간의 모래",
+   "desc": "기본 재화. 제작·강화에 사용",
+   "currency": true
+  },
+  {
+   "id": "slime_goo",
+   "name": "슬라임 점액"
+  },
+  {
+   "id": "wolf_hide",
+   "name": "늑대 가죽"
+  },
+  {
+   "id": "firefly_dust",
+   "name": "반딧불 가루"
+  },
+  {
+   "id": "moss_chunk",
+   "name": "이끼 덩어리"
+  },
+  {
+   "id": "glow_spore",
+   "name": "발광 포자"
+  },
+  {
+   "id": "stag_antler",
+   "name": "사슴왕의 뿔"
+  },
+  {
+   "id": "chrono_shard",
+   "name": "크로노 파편",
+   "desc": "크로노 코어 강화 재료"
+  },
+  {
+   "id": "dust_common",
+   "name": "일반 분해 가루"
+  },
+  {
+   "id": "dust_rare",
+   "name": "희귀 분해 가루"
+  },
+  {
+   "id": "dust_epic",
+   "name": "영웅 분해 가루"
+  },
+  {
+   "id": "dust_legendary",
+   "name": "전설 분해 가루"
+  },
+  {
+   "id": "dust_mythic",
+   "name": "신화 분해 가루"
+  }
+ ],
+ "material_stack": 999,
+ "skillbooks": {
+  "tiers": [
+   {
+    "id": "old",
+    "name": "낡은 스킬서",
+    "level": 1,
+    "offers": [
+     "old"
+    ]
+   },
+   {
+    "id": "trainee",
+    "name": "수련자의 스킬서",
+    "level": 15,
+    "offers": [
+     "old",
+     "trainee"
+    ]
+   },
+   {
+    "id": "master",
+    "name": "달인의 스킬서",
+    "level": 35,
+    "offers": [
+     "trainee",
+     "master"
+    ]
+   },
+   {
+    "id": "meridian",
+    "name": "메리디안의 스킬서",
+    "level": 55,
+    "offers": [
+     "master",
+     "meridian"
+    ]
+   }
+  ],
+  "chrono": {
+   "id": "chrono",
+   "name": "크로노 스킬서"
+  }
+ },
+ "inventory": {
+  "equip_slots": 48,
+  "tabs": [
+   "equip",
+   "consume",
+   "material",
+   "book"
+  ],
+  "storage": 100
+ },
+ "equip_slots": [
+  "weapon",
+  "helmet",
+  "chest",
+  "gloves",
+  "boots",
+  "ring1",
+  "ring2",
+  "necklace"
+ ],
+ "core_slots": 6
+}
