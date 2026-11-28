@@ -31,7 +31,21 @@ func _ready() -> void:
 	camera.limit_rect = Rect2(0, 0, W * T, H * T)
 	add_child(camera)
 	camera.make_current()
+	_give_test_kit()
 	Game.world_ready.emit()
+
+## 테스트 구역 전용: 무기 6군을 바로 시험할 수 있게 일반 무기와 낡은 스킬서를 넣어 준다 (실제 게임 시작과는 다름).
+func _give_test_kit() -> void:
+	var pd := Game.data
+	if pd.get_meta("test_kit", false): return
+	pd.set_meta("test_kit", true)
+	for id in ["gs_iron_slab", "dg_hunting", "sp_farmer_fork", "bw_hunter_short", "st_apprentice"]:
+		var it := Items.make_weapon(id)
+		pd.add_item(it, false)
+	for c in Data.CLASSES: pd.add_book("old", c, 2, false)
+	pd.add_stack("herb_bundle", 5, false)
+	pd.add_stack("stamina_candy", 5, false)
+	Game.notify.call_deferred("테스트 구역 — I: 인벤토리(무기 교체·스킬서 읽기)  K: 스킬  O: 키 설정  `: 디버그 콘솔", Color(0.75, 0.95, 1.0))
 
 func _build_borders() -> void:
 	var rng := RandomNumberGenerator.new()
